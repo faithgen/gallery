@@ -10,9 +10,9 @@ use FaithGen\Gallery\Http\Requests\Album\DeleteImageRequest;
 use FaithGen\Gallery\Http\Requests\Album\GetRequest;
 use FaithGen\Gallery\Http\Requests\Album\ImagesRequest;
 use FaithGen\Gallery\Http\Requests\Album\UpdateRequest;
-use App\Http\Requests\IndexRequest;
+use FaithGen\SDK\Http\Requests\IndexRequest;
 use FaithGen\Gallery\Http\Resources\Album as AlbumResource;
-use App\Http\Resources\Image as ImageResource;
+use FaithGen\Gallery\Http\Resources\Image as ImageResource;
 use FaithGen\Gallery\Services\AlbumService;
 use Intervention\Image\ImageManager;
 
