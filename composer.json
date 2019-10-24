@@ -1,5 +1,5 @@
 {
-    "name": "faithgen/gallery",
+    "name": "innoflash/gallery",
     "description": "This is the Gallery plugin for FaithGen system",
     "type": "library",
     "require": {
