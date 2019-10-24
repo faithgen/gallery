@@ -27,10 +27,22 @@ class GalleryServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadRoutesFrom(__DIR__ . '/../routes/gallery.php');
+        $this->mergeConfigFrom(__DIR__ . '/../config/faithgen-gallery.php', 'faithgen-gallery');
         $this->publishes([
             __DIR__ . '/../storage/gallery/' => storage_path('app/public/gallery')
         ]);
 
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__ . '/../config/faithgen-gallery.php' => config_path('faithgen-gallery.php'),
+            ], 'faithgen-gallery-config');
+
+            $this->publishes([
+                __DIR__ . '/../database/migrations/' => database_path('migrations'),
+            ], 'faithgen-gallery-migrations');
+
+
+        }
         Album::observe(AlbumObserver::class);
     }
 

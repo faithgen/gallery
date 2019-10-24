@@ -2,10 +2,10 @@
 
 namespace FaithGen\Gallery\Policies;
 
-use App\Models\Ministry;
 use Carbon\Carbon;
 use FaithGen\Gallery\Models\Album;
 use FaithGen\SDK\Helpers\Helper;
+use FaithGen\SDK\Models\Ministry;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class AlbumPolicy

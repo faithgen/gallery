@@ -21,7 +21,6 @@ class ProcessImage implements ShouldQueue
      */
     public function __construct(ImageManager $imageManager)
     {
-        //
         $this->imageManager = $imageManager;
     }
 
