@@ -2,9 +2,9 @@
 
 namespace FaithGen\Gallery\Providers;
 
-use App\Observers\Ministry\AlbumObserver;
 use FaithGen\Gallery\Models\Album;
 
+use FaithGen\Gallery\Observers\Ministry\AlbumObserver;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class GalleryServiceProvider extends ServiceProvider

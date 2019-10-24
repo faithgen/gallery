@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Observers\Ministry;
+namespace FaithGen\Gallery\Observers\Ministry;
 
 use App\Events\Album\Created;
 use FaithGen\Gallery\Models\Album;
