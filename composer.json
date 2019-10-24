@@ -1,0 +1,28 @@
+{
+    "name": "faithgen/gallery",
+    "description": "This is the Gallery plugin for FaithGen system",
+    "type": "library",
+    "require": {
+        "faithgen/sdk": "dev-master"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "innoflash",
+            "email": "innocentmazando@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "FaithGen\\Gallery\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "FaithGen\\Gallery\\Providers\\GalleryServiceProvider"
+            ]
+        }
+    }
+    "minimum-stability": "dev"
+}
