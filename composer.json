@@ -3,7 +3,8 @@
     "description": "This is the Gallery plugin for FaithGen system",
     "type": "library",
     "require": {
-        "faithgen/sdk": "dev-master"
+        "faithgen/sdk": "dev-master",
+        "intervention/image": "^2.5"
     },
     "license": "MIT",
     "authors": [
@@ -23,6 +24,6 @@
                 "FaithGen\\Gallery\\Providers\\GalleryServiceProvider"
             ]
         }
-    }
+    },
     "minimum-stability": "dev"
 }
