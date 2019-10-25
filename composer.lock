@@ -138,16 +138,16 @@
         },
         {
             "name": "faithgen/sdk",
-            "version": "v1.0.3",
+            "version": "v1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/faithgen/laravel-sdk.git",
-                "reference": "f76049de6e580c2d62fd69be936c5e3700f875d4"
+                "reference": "c501189e490d0c5f6815fa7955760df2c86027b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/faithgen/laravel-sdk/zipball/f76049de6e580c2d62fd69be936c5e3700f875d4",
-                "reference": "f76049de6e580c2d62fd69be936c5e3700f875d4",
+                "url": "https://api.github.com/repos/faithgen/laravel-sdk/zipball/c501189e490d0c5f6815fa7955760df2c86027b2",
+                "reference": "c501189e490d0c5f6815fa7955760df2c86027b2",
                 "shasum": ""
             },
             "require": {
@@ -180,7 +180,7 @@
                 }
             ],
             "description": "This is the SDK for the FaithGen system",
-            "time": "2019-10-24T14:40:16+00:00"
+            "time": "2019-10-25T09:30:17+00:00"
         },
         {
             "name": "firebase/php-jwt",
