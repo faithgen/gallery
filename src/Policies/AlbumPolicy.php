@@ -3,6 +3,7 @@
 namespace FaithGen\Gallery\Policies;
 
 use Carbon\Carbon;
+use FaithGen\Gallery\Helpers\AlbumHelper;
 use FaithGen\Gallery\Models\Album;
 use FaithGen\SDK\Helpers\Helper;
 use FaithGen\SDK\Models\Ministry;
@@ -26,8 +27,8 @@ class AlbumPolicy
     /**
      * Determine whether the user can view the album.
      *
-     * @param \App\Models\Ministry $user
-     * @param \App\Models\Ministry\Album $album
+     * @param Ministry $user
+     * @param Album $album
      * @return mixed
      */
     public function view(Ministry $user, Album $album)
@@ -43,15 +44,15 @@ class AlbumPolicy
      */
     public function create(Ministry $user)
     {
-        $albumsCount = Album::whereBetween('created_at', [Carbon::now()->firstOfMonth(), Carbon::now()->lastOfMonth()])->count();
+        $albumsCount = Album::where('ministry_id', $user->id)->whereBetween('created_at', [Carbon::now()->firstOfMonth(), Carbon::now()->lastOfMonth()])->count();
         return $this->getAuthorization($user, $albumsCount, 'albums');
     }
 
     /**
      * Determine whether the user can update the album.
      *if
-     * @param \App\Models\Ministry $user
-     * @param \App\Models\Ministry\Album $album
+     * @param Ministry $user
+     * @param Album $album
      * @return mixed
      */
     public function update(Ministry $user, Album $album)
@@ -62,8 +63,8 @@ class AlbumPolicy
     /**
      * Determine whether the user can delete the album.
      *
-     * @param \App\Models\Ministry $user
-     * @param \App\Models\Ministry\Album $album
+     * @param Ministry $user
+     * @param Album $album
      * @return mixed
      */
     public function delete(Ministry $user, Album $album)
@@ -80,8 +81,8 @@ class AlbumPolicy
             $allow = $this->getAuthorization($ministry, $albumSize, 'images');
             if (!$allow) return false;
             else {
-                if ($ministry->account->level === 'Free') $balance = Helper::$freeAlbumImagesCount - $albumSize;
-                else if ($ministry->account->level === 'Premium') $balance = Helper::$premiumAlbumImagesCount - $albumSize;
+                if ($ministry->account->level === 'Free') $balance = AlbumHelper::$freeAlbumImagesCount - $albumSize;
+                else if ($ministry->account->level === 'Premium') $balance = AlbumHelper::$premiumAlbumImagesCount - $albumSize;
                 else $balance = 10000;
 
                 return true;
@@ -93,11 +94,11 @@ class AlbumPolicy
     private function getAuthorization(Ministry $ministry, int $count, string $type): bool
     {
         if (strcmp($type, 'albums') === 0) {
-            $freeCount = Helper::$freeAlbumsCount;
-            $premiumCount = Helper::$premiumAlbumsCount;
+            $freeCount = AlbumHelper::$freeAlbumsCount;
+            $premiumCount = AlbumHelper::$premiumAlbumsCount;
         } else {
-            $freeCount = Helper::$freeAlbumImagesCount;
-            $premiumCount = Helper::$premiumAlbumImagesCount;
+            $freeCount = AlbumHelper::$freeAlbumImagesCount;
+            $premiumCount = AlbumHelper::$premiumAlbumImagesCount;
         }
         if ($ministry->account->level === 'Free') {
             if ($count >= $freeCount) return false;
