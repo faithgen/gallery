@@ -3,10 +3,9 @@
 namespace FaithGen\Gallery\Providers;
 
 use FaithGen\Gallery\Models\Album;
-
 use FaithGen\Gallery\Observers\Ministry\AlbumObserver;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\ServiceProvider;
 
 class GalleryServiceProvider extends ServiceProvider
 {
@@ -27,7 +26,8 @@ class GalleryServiceProvider extends ServiceProvider
                 __DIR__ . '/../config/faithgen-gallery.php' => config_path('faithgen-gallery.php'),
             ], 'faithgen-gallery-config');
 
-            if (config('faithgen-sdk.source')){
+            if (config('faithgen-sdk.source')) {
+                $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
                 $this->publishes([
                     __DIR__ . '/../storage/gallery/' => storage_path('app/public/gallery')
                 ]);
@@ -44,8 +44,8 @@ class GalleryServiceProvider extends ServiceProvider
     {
         Route::group($this->routeConfiguration(), function () {
             $this->loadRoutesFrom(__DIR__ . '/../routes/gallery.php');
-            if(config('faithgen-sdk.source'))
-                $this->loadRoutesFrom(__DIR__.'/../routes/source.php');
+            if (config('faithgen-sdk.source'))
+                $this->loadRoutesFrom(__DIR__ . '/../routes/source.php');
         });
     }
 
