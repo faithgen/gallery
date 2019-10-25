@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ec719537a089440469e8ebd14c03fd40",
+    "content-hash": "7858f1efd272020e56057f3eb46b65cb",
     "packages": [
         {
             "name": "defuse/php-encryption",
@@ -138,16 +138,16 @@
         },
         {
             "name": "faithgen/sdk",
-            "version": "v1.0.2",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/faithgen/laravel-sdk.git",
-                "reference": "6c42a5ff6ce1a3b4dafc14152285f09193c8e37f"
+                "reference": "f76049de6e580c2d62fd69be936c5e3700f875d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/faithgen/laravel-sdk/zipball/6c42a5ff6ce1a3b4dafc14152285f09193c8e37f",
-                "reference": "6c42a5ff6ce1a3b4dafc14152285f09193c8e37f",
+                "url": "https://api.github.com/repos/faithgen/laravel-sdk/zipball/f76049de6e580c2d62fd69be936c5e3700f875d4",
+                "reference": "f76049de6e580c2d62fd69be936c5e3700f875d4",
                 "shasum": ""
             },
             "require": {
@@ -180,7 +180,7 @@
                 }
             ],
             "description": "This is the SDK for the FaithGen system",
-            "time": "2019-10-24T13:37:47+00:00"
+            "time": "2019-10-24T14:40:16+00:00"
         },
         {
             "name": "firebase/php-jwt",
@@ -422,12 +422,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/auth.git",
-                "reference": "8768cb19a2d74191c8876f66d80c483a38bc8120"
+                "reference": "2778eeb3b5a0eefcb28efa358c79ab3faf5f0376"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/auth/zipball/8768cb19a2d74191c8876f66d80c483a38bc8120",
-                "reference": "8768cb19a2d74191c8876f66d80c483a38bc8120",
+                "url": "https://api.github.com/repos/illuminate/auth/zipball/2778eeb3b5a0eefcb28efa358c79ab3faf5f0376",
+                "reference": "2778eeb3b5a0eefcb28efa358c79ab3faf5f0376",
                 "shasum": ""
             },
             "require": {
@@ -465,7 +465,7 @@
             ],
             "description": "The Illuminate Auth package.",
             "homepage": "https://laravel.com",
-            "time": "2019-10-24T01:00:58+00:00"
+            "time": "2019-10-24T17:05:30+00:00"
         },
         {
             "name": "illuminate/console",
@@ -473,12 +473,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/console.git",
-                "reference": "f0f56238933832b3aa1267d819808f1882904859"
+                "reference": "6e56966a3f575fa8ead5c52cf0969d83cc4709b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/console/zipball/f0f56238933832b3aa1267d819808f1882904859",
-                "reference": "f0f56238933832b3aa1267d819808f1882904859",
+                "url": "https://api.github.com/repos/illuminate/console/zipball/6e56966a3f575fa8ead5c52cf0969d83cc4709b5",
+                "reference": "6e56966a3f575fa8ead5c52cf0969d83cc4709b5",
                 "shasum": ""
             },
             "require": {
@@ -516,7 +516,7 @@
             ],
             "description": "The Illuminate Console package.",
             "homepage": "https://laravel.com",
-            "time": "2019-09-26T08:57:41+00:00"
+            "time": "2019-10-24T17:05:30+00:00"
         },
         {
             "name": "illuminate/container",
@@ -659,12 +659,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "d8f7aa8a7f03bfe9dd2d8c15d967e618f7d8856b"
+                "reference": "05856939aadbce39e6a6c243992d0055d9bf6f1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/d8f7aa8a7f03bfe9dd2d8c15d967e618f7d8856b",
-                "reference": "d8f7aa8a7f03bfe9dd2d8c15d967e618f7d8856b",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/05856939aadbce39e6a6c243992d0055d9bf6f1a",
+                "reference": "05856939aadbce39e6a6c243992d0055d9bf6f1a",
                 "shasum": ""
             },
             "require": {
@@ -711,7 +711,7 @@
                 "orm",
                 "sql"
             ],
-            "time": "2019-10-24T12:21:53+00:00"
+            "time": "2019-10-24T17:05:30+00:00"
         },
         {
             "name": "illuminate/encryption",
@@ -1023,12 +1023,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "754949caa9b94ffac609a9f6a28e46554a5e1fd2"
+                "reference": "a83e9e7baecffa5925198f7af27d58010c3ac254"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/754949caa9b94ffac609a9f6a28e46554a5e1fd2",
-                "reference": "754949caa9b94ffac609a9f6a28e46554a5e1fd2",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/a83e9e7baecffa5925198f7af27d58010c3ac254",
+                "reference": "a83e9e7baecffa5925198f7af27d58010c3ac254",
                 "shasum": ""
             },
             "require": {
@@ -1077,7 +1077,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2019-10-21T19:08:32+00:00"
+            "time": "2019-10-24T17:05:30+00:00"
         },
         {
             "name": "intervention/image",
