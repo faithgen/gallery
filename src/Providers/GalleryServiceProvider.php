@@ -5,21 +5,11 @@ namespace FaithGen\Gallery\Providers;
 use FaithGen\Gallery\Models\Album;
 
 use FaithGen\Gallery\Observers\Ministry\AlbumObserver;
-use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
 class GalleryServiceProvider extends ServiceProvider
 {
-
-    protected $listen = [
-        \FaithGen\Gallery\Events\Album\ImageSaved::class => [
-            \FaithGen\Gallery\Listeners\Album\ImageSaved\ProcessImage::class,
-            \FaithGen\Gallery\Listeners\Album\ImageSaved\S3Upload::class,
-        ],
-        \FaithGen\Gallery\Events\Album\Created::class => [
-            \FaithGen\Gallery\Listeners\Album\Created\MessageFollowUsers::class,
-        ],
-    ];
 
     /**
      * Bootstrap services.
@@ -33,7 +23,6 @@ class GalleryServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../config/faithgen-gallery.php', 'faithgen-gallery');
 
         $this->registerRoutes();
-
 
         if ($this->app->runningInConsole()) {
             $this->publishes([

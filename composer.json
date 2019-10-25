@@ -23,7 +23,8 @@
         "laravel": {
             "providers": [
                 "FaithGen\\Gallery\\Providers\\GalleryServiceProvider",
-                "FaithGen\\Gallery\\Providers\\AuthServiceProvider"
+                "FaithGen\\Gallery\\Providers\\AuthServiceProvider",
+                "FaithGen\\Gallery\\Providers\\EventServiceProvider"
             ]
         }
     },
