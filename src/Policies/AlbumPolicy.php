@@ -19,7 +19,7 @@ class AlbumPolicy
      * @param \App\Models\Ministry $user
      * @return mixed
      */
-    public function viewAny(Ministry $user)
+    public static function viewAny(Ministry $user)
     {
         //
     }
@@ -31,7 +31,7 @@ class AlbumPolicy
      * @param Album $album
      * @return mixed
      */
-    public function view(Ministry $user, Album $album)
+    public static function view(Ministry $user, Album $album)
     {
         return $user->id === $album->ministry_id;
     }
@@ -42,10 +42,10 @@ class AlbumPolicy
      * @param \App\Models\Ministry $user
      * @return mixed
      */
-    public function create(Ministry $user)
+    public static function create(Ministry $user)
     {
         $albumsCount = Album::where('ministry_id', $user->id)->whereBetween('created_at', [Carbon::now()->firstOfMonth(), Carbon::now()->lastOfMonth()])->count();
-        return $this->getAuthorization($user, $albumsCount, 'albums');
+        return self::getAuthorization($user, $albumsCount, 'albums');
     }
 
     /**
@@ -55,7 +55,7 @@ class AlbumPolicy
      * @param Album $album
      * @return mixed
      */
-    public function update(Ministry $user, Album $album)
+    public static function update(Ministry $user, Album $album)
     {
         return $user->id === $album->ministry_id;
     }
@@ -67,18 +67,18 @@ class AlbumPolicy
      * @param Album $album
      * @return mixed
      */
-    public function delete(Ministry $user, Album $album)
+    public static function delete(Ministry $user, Album $album)
     {
         return $user->id === $album->ministry_id;
     }
 
-    public function addImages(Ministry $ministry, Album $album)
+    public static function addImages(Ministry $ministry, Album $album)
     {
         $albumSize = $album->images()->count();
         if (strcmp($ministry->id, $album->ministry_id) !== 0) return false;
         else {
-            return $this->getAuthorization($ministry, $albumSize, 'images');
-            $allow = $this->getAuthorization($ministry, $albumSize, 'images');
+            return self::getAuthorization($ministry, $albumSize, 'images');
+            $allow = self::getAuthorization($ministry, $albumSize, 'images');
             if (!$allow) return false;
             else {
                 if ($ministry->account->level === 'Free') $balance = AlbumHelper::$freeAlbumImagesCount - $albumSize;
@@ -91,7 +91,7 @@ class AlbumPolicy
         }
     }
 
-    private function getAuthorization(Ministry $ministry, int $count, string $type): bool
+    private static function getAuthorization(Ministry $ministry, int $count, string $type): bool
     {
         if (strcmp($type, 'albums') === 0) {
             $freeCount = AlbumHelper::$freeAlbumsCount;

@@ -18,11 +18,11 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         //albums gates
-        Gate::define('album.create', '\FaithGen\Gallery\Policies\AlbumPolicy@create');
-        Gate::define('album.update', '\FaithGen\Gallery\Policies\AlbumPolicy@update');
-        Gate::define('album.delete', '\FaithGen\Gallery\Policies\AlbumPolicy@delete');
-        Gate::define('album.view', '\FaithGen\Gallery\Policies\AlbumPolicy@view');
-        Gate::define('album.add.images', '\FaithGen\Gallery\Policies\AlbumPolicy@addImages');
+        Gate::define('album.create', [AlbumPolicy::class, 'create']);
+        Gate::define('album.update', [AlbumPolicy::class, 'update']);
+        Gate::define('album.delete', [AlbumPolicy::class, 'delete']);
+        Gate::define('album.view', [AlbumPolicy::class, 'view']);
+        Gate::define('album.add.images', [AlbumPolicy::class, 'addImages']);
     }
 
     /**

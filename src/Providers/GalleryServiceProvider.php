@@ -18,8 +18,6 @@ class GalleryServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        parent::boot();
-
         $this->mergeConfigFrom(__DIR__ . '/../config/faithgen-gallery.php', 'faithgen-gallery');
 
         $this->registerRoutes();
