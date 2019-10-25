@@ -29,21 +29,26 @@ class GalleryServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
-        $this->registerRoutes();
 
         $this->mergeConfigFrom(__DIR__ . '/../config/faithgen-gallery.php', 'faithgen-gallery');
-        $this->publishes([
-            __DIR__ . '/../storage/gallery/' => storage_path('app/public/gallery')
-        ]);
+
+        $this->registerRoutes();
+
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__ . '/../config/faithgen-gallery.php' => config_path('faithgen-gallery.php'),
             ], 'faithgen-gallery-config');
 
-            $this->publishes([
-                __DIR__ . '/../database/migrations/' => database_path('migrations'),
-            ], 'faithgen-gallery-migrations');
+            if (config('faithgen-sdk.source')){
+                $this->publishes([
+                    __DIR__ . '/../storage/gallery/' => storage_path('app/public/gallery')
+                ]);
+
+                $this->publishes([
+                    __DIR__ . '/../database/migrations/' => database_path('migrations'),
+                ], 'faithgen-gallery-migrations');
+            }
         }
         Album::observe(AlbumObserver::class);
     }
@@ -52,15 +57,17 @@ class GalleryServiceProvider extends ServiceProvider
     {
         Route::group($this->routeConfiguration(), function () {
             $this->loadRoutesFrom(__DIR__ . '/../routes/gallery.php');
+            if(config('faithgen-sdk.source'))
+                $this->loadRoutesFrom(__DIR__.'/../routes/source.php');
         });
     }
 
     private function routeConfiguration()
     {
         return [
-            'prefix' => config('faithgen-gallery.prefix') ? config('faithgen-gallery.prefix') : 'api',
+            'prefix' => config('faithgen-gallery.prefix'),
             'namespace' => "FaithGen\Gallery\Http\Controllers",
-            'middleware' => ['auth:api', 'ministry.activated'],
+            'middleware' => config('faithgen-gallery.middlewares'),
         ];
     }
 
