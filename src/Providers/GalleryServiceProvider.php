@@ -4,11 +4,13 @@ namespace FaithGen\Gallery\Providers;
 
 use FaithGen\Gallery\Models\Album;
 use FaithGen\Gallery\Observers\Ministry\AlbumObserver;
+use FaithGen\SDK\Traits\ConfigTrait;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class GalleryServiceProvider extends ServiceProvider
 {
+    use ConfigTrait;
 
     /**
      * Bootstrap services.
@@ -19,43 +21,24 @@ class GalleryServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/faithgen-gallery.php', 'faithgen-gallery');
 
-        $this->registerRoutes();
+        $this->registerRoutes(__DIR__ . '/../routes/gallery.php', __DIR__ . '/../routes/source.php');
 
-        if ($this->app->runningInConsole()) {
+        $this->setUpFiles(function () {
+            $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
             $this->publishes([
-                __DIR__ . '/../config/faithgen-gallery.php' => config_path('faithgen-gallery.php'),
-            ], 'faithgen-gallery-config');
+                __DIR__ . '/../storage/gallery/' => storage_path('app/public/gallery')
+            ]);
 
-            if (config('faithgen-sdk.source')) {
-                $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-                $this->publishes([
-                    __DIR__ . '/../storage/gallery/' => storage_path('app/public/gallery')
-                ]);
-
-                $this->publishes([
-                    __DIR__ . '/../database/migrations/' => database_path('migrations'),
-                ], 'faithgen-gallery-migrations');
-            }
-        }
-        Album::observe(AlbumObserver::class);
-    }
-
-    private function registerRoutes()
-    {
-        Route::group($this->routeConfiguration(), function () {
-            $this->loadRoutesFrom(__DIR__ . '/../routes/gallery.php');
-            if (config('faithgen-sdk.source'))
-                $this->loadRoutesFrom(__DIR__ . '/../routes/source.php');
+            $this->publishes([
+                __DIR__ . '/../database/migrations/' => database_path('migrations'),
+            ], 'faithgen-gallery-migrations');
         });
-    }
 
-    private function routeConfiguration()
-    {
-        return [
-            'prefix' => config('faithgen-gallery.prefix'),
-            'namespace' => "FaithGen\Gallery\Http\Controllers",
-            'middleware' => config('faithgen-gallery.middlewares'),
-        ];
+        $this->publishes([
+            __DIR__ . '/../config/faithgen-gallery.php' => config_path('faithgen-gallery.php'),
+        ], 'faithgen-gallery-config');
+
+        Album::observe(AlbumObserver::class);
     }
 
     /**
@@ -66,5 +49,18 @@ class GalleryServiceProvider extends ServiceProvider
     public function register()
     {
         //
+    }
+
+    /**
+     * The config you want to be applied onto your routes
+     * @return array the rules eg, middleware, prefix, namespace
+     */
+    function routeConfiguration(): array
+    {
+        return [
+            'prefix' => config('faithgen-gallery.prefix'),
+            'namespace' => "FaithGen\Gallery\Http\Controllers",
+            'middleware' => config('faithgen-gallery.middlewares'),
+        ];
     }
 }
