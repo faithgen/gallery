@@ -23,7 +23,7 @@ class GalleryServiceProvider extends ServiceProvider
 
         $this->registerRoutes(__DIR__ . '/../routes/gallery.php', __DIR__ . '/../routes/source.php');
 
-        $this->setUpFiles(function () {
+        $this->setUpSourceFiles(function () {
             $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
             $this->publishes([
                 __DIR__ . '/../storage/gallery/' => storage_path('app/public/gallery')
