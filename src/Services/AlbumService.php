@@ -5,7 +5,7 @@ namespace FaithGen\Gallery\Services;
 
 
 use FaithGen\Gallery\Models\Album;
-use FaithGen\SDK\Services\CRUDServices;
+use InnoFlash\LaraStart\Services\CRUDServices;
 
 class AlbumService extends CRUDServices
 {

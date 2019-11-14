@@ -4,7 +4,7 @@
     "type": "library",
     "require": {
         "intervention/image": "^2.5",
-        "faithgen/sdk": "^1.0.3",
+        "faithgen/sdk": "^1.1.0",
         "crazybooot/base64-validation": "^1.0"
     },
     "license": "MIT",
