@@ -13,4 +13,5 @@ Route::name('albums.')->prefix('albums/')->group(function () {
 
 Route::name('images.')->prefix('images')->group(function () {
     Route::post('comment', [ImageController::class, 'comment']);
+    Route::get('comments/{image}', [ImageController::class, 'comments']);
 });

@@ -18,6 +18,7 @@ class Image extends JsonResource
         return [
             'id' => $this->id,
             'caption' => $this->caption,
+            'comments' => $this->comments()->count(),
             'avatar' => AlbumHelper::getImageLinks($this->resource),
             'date' => AlbumHelper::getDates($this->created_at)
         ];

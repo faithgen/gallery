@@ -19,6 +19,7 @@ class Album extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
+            'comments' => $this->comments()->count(),
             'date' => AlbumHelper::getDates($this->created_at),
             'images' => [
                 'count' => $this->images()->count()

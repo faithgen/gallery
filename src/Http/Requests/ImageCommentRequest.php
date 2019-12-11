@@ -25,7 +25,7 @@ class ImageCommentRequest extends FormRequest
     public function rules()
     {
         return [
-            'album_id' => Helper::$idValidation,
+            'image_id' => Helper::$idValidation,
             'comment' => 'required'
         ];
     }
