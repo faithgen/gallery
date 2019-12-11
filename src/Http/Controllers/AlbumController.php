@@ -19,7 +19,7 @@ use FaithGen\Gallery\Http\Requests\Album\AddImagesRequest;
 use FaithGen\Gallery\Http\Resources\Album as AlbumResource;
 use FaithGen\Gallery\Http\Resources\Image as ImageResource;
 use FaithGen\Gallery\Http\Requests\Album\DeleteImageRequest;
-use FaithGen\SDK\Http\Resources\Comment as CommentsResource;
+use FaithGen\SDK\Helpers\CommentHelper;
 
 class AlbumController extends Controller
 {
@@ -95,22 +95,11 @@ class AlbumController extends Controller
 
     public function comment(CommentRequest $request)
     {
-        try {
-            $this->albumService->getAlbum()->comments()->create([
-                'comment' => $request->comment,
-                'creatable_id' => auth()->user()->id,
-                'creatable_type' => get_class(auth()->user()),
-            ]);
-            return $this->successResponse('Comment posted');
-        } catch (\Exception $e) {
-            abort(500, $e->getMessage());
-        }
+        return CommentHelper::createComment($this->albumService->getAlbum(), $request);
     }
 
     public function comments(Request $request, Album $album)
     {
-        $comments = $album->comments()->latest()->paginate(Helper::getLimit($request));
-        CommentsResource::wrap('comments');
-        return CommentsResource::collection($comments);
+        return CommentHelper::getComments($album, $request);
     }
 }
