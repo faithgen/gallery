@@ -10,6 +10,7 @@ use FaithGen\Gallery\Http\Requests\Album\DeleteImageRequest;
 use FaithGen\Gallery\Http\Requests\Album\GetRequest;
 use FaithGen\Gallery\Http\Requests\Album\ImagesRequest;
 use FaithGen\Gallery\Http\Requests\Album\UpdateRequest;
+use FaithGen\Gallery\Http\Requests\CommentRequest;
 use FaithGen\SDK\Http\Requests\IndexRequest;
 use FaithGen\Gallery\Http\Resources\Album as AlbumResource;
 use FaithGen\Gallery\Http\Resources\Image as ImageResource;
@@ -86,5 +87,19 @@ class AlbumController extends Controller
     function addImages(AddImagesRequest $request)
     {
         return $request->all();
+    }
+
+    public function comment(CommentRequest $request)
+    {
+        try {
+            $this->albumService->getAlbum()->comments()->create([
+                'comment' => $request->comment,
+                'creatable_id' => auth()->user()->id,
+                'creatable_type' => get_class(auth()->user()),
+            ]);
+            return $this->successResponse('Comment posted');
+        } catch (\Exception $e) {
+            abort(500, $e->getMessage());
+        }
     }
 }

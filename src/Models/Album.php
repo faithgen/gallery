@@ -5,12 +5,13 @@ namespace FaithGen\Gallery\Models;
 use FaithGen\SDK\Traits\Relationships\Belongs\BelongsToMinistryTrait;
 use FaithGen\SDK\Traits\Relationships\Morphs\ImageableTrait;
 use FaithGen\SDK\Models\UuidModel;
+use FaithGen\SDK\Traits\Relationships\Morphs\CommentableTrait;
 use FaithGen\SDK\Traits\StorageTrait;
 use FaithGen\SDK\Traits\TitleTrait;
 
 class Album extends UuidModel
 {
-    use  ImageableTrait, BelongsToMinistryTrait, StorageTrait, TitleTrait;
+    use  ImageableTrait, BelongsToMinistryTrait, StorageTrait, TitleTrait, CommentableTrait;
 
     //****************************************************************************//
     //***************************** MODEL ATTRIBUTES *****************************//
