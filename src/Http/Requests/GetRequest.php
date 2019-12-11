@@ -2,9 +2,12 @@
 
 namespace FaithGen\Gallery\Http\Requests\Album;
 
-use FaithGen\Gallery\Helpers\AlbumHelper;
+use FaithGen\SDK\Models\Ministry;
 use FaithGen\Gallery\Models\Album;
+use FaithGen\Gallery\Helpers\AlbumHelper;
+use FaithGen\Gallery\Services\AlbumService;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class GetRequest extends FormRequest
 {
@@ -13,10 +16,10 @@ class GetRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(AlbumService $albumService)
     {
-        $album = Album::findOrFail(request()->album_id);
-        return $this->user()->can('album.view', $album);
+        if (auth()->user() instanceof Ministry) return $this->user()->can('album.view', $albumService->getAlbum());
+        return true;
     }
 
     /**
@@ -29,5 +32,10 @@ class GetRequest extends FormRequest
         return [
             'album_id' => AlbumHelper::$idValidation
         ];
+    }
+
+    function failedAuthorization()
+    {
+        throw new AuthorizationException('You do not have access to this album');
     }
 }

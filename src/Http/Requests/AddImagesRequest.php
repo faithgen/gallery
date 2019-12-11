@@ -4,6 +4,7 @@ namespace FaithGen\Gallery\Http\Requests\Album;
 
 use FaithGen\Gallery\Helpers\AlbumHelper;
 use FaithGen\Gallery\Models\Album;
+use FaithGen\Gallery\Services\AlbumService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -14,10 +15,9 @@ class AddImagesRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(AlbumService $albumService)
     {
-        $album = Album::findOrFail(request()->album_id);
-        return $this->user()->can('album.add.images', $album);
+        return $this->user()->can('album.add.images', $albumService->getAlbum);
     }
 
     /**

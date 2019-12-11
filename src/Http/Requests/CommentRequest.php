@@ -2,7 +2,10 @@
 
 namespace FaithGen\Gallery\Http\Requests;
 
+use FaithGen\Gallery\Services\AlbumService;
 use FaithGen\SDK\Helpers\Helper;
+use FaithGen\SDK\Models\Ministry;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CommentRequest extends FormRequest
@@ -12,8 +15,9 @@ class CommentRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(AlbumService $albumService)
     {
+        if (auth()->user() instanceof Ministry) return $this->user()->can('album.view', $albumService->getAlbum());
         return true;
     }
 
@@ -28,5 +32,10 @@ class CommentRequest extends FormRequest
             'album_id' => Helper::$idValidation,
             'comment' => 'required'
         ];
+    }
+
+    function failedAuthorization()
+    {
+        throw new AuthorizationException('You do not have access to this album');
     }
 }
