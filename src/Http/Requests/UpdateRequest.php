@@ -2,7 +2,6 @@
 
 namespace FaithGen\Gallery\Http\Requests\Album;
 
-use FaithGen\Gallery\Models\Album;
 use FaithGen\Gallery\Helpers\AlbumHelper;
 use FaithGen\Gallery\Services\AlbumService;
 use Illuminate\Foundation\Http\FormRequest;
@@ -34,10 +33,8 @@ class UpdateRequest extends FormRequest
         ];
     }
 
-    
     function failedAuthorization()
     {
         throw new AuthorizationException('You do not have access to this album');
     }
-}
 }

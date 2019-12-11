@@ -3,10 +3,9 @@
 namespace FaithGen\Gallery\Http\Requests\Album;
 
 use FaithGen\Gallery\Helpers\AlbumHelper;
-use FaithGen\Gallery\Models\Album;
 use FaithGen\Gallery\Services\AlbumService;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class AddImagesRequest extends FormRequest
 {

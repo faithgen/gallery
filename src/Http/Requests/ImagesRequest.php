@@ -3,7 +3,6 @@
 namespace FaithGen\Gallery\Http\Requests\Album;
 
 use FaithGen\SDK\Helpers\Helper;
-use FaithGen\Gallery\Models\Album;
 use FaithGen\Gallery\Services\AlbumService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;

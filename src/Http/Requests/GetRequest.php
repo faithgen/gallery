@@ -3,7 +3,6 @@
 namespace FaithGen\Gallery\Http\Requests\Album;
 
 use FaithGen\SDK\Models\Ministry;
-use FaithGen\Gallery\Models\Album;
 use FaithGen\Gallery\Helpers\AlbumHelper;
 use FaithGen\Gallery\Services\AlbumService;
 use Illuminate\Foundation\Http\FormRequest;
