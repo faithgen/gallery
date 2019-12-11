@@ -2,20 +2,24 @@
 
 namespace FaithGen\Gallery\Http\Controllers;
 
+use Illuminate\Http\Request;
+use FaithGen\Gallery\Models\Album;
 use App\Http\Controllers\Controller;
+use InnoFlash\LaraStart\Http\Helper;
+use Intervention\Image\ImageManager;
+use FaithGen\Gallery\Services\AlbumService;
+use FaithGen\SDK\Http\Requests\IndexRequest;
 use FaithGen\Gallery\Events\Album\ImageSaved;
-use FaithGen\Gallery\Http\Requests\Album\AddImagesRequest;
-use FaithGen\Gallery\Http\Requests\Album\CreateRequest;
-use FaithGen\Gallery\Http\Requests\Album\DeleteImageRequest;
+use FaithGen\Gallery\Http\Requests\CommentRequest;
 use FaithGen\Gallery\Http\Requests\Album\GetRequest;
+use FaithGen\Gallery\Http\Requests\Album\CreateRequest;
 use FaithGen\Gallery\Http\Requests\Album\ImagesRequest;
 use FaithGen\Gallery\Http\Requests\Album\UpdateRequest;
-use FaithGen\Gallery\Http\Requests\CommentRequest;
-use FaithGen\SDK\Http\Requests\IndexRequest;
+use FaithGen\Gallery\Http\Requests\Album\AddImagesRequest;
 use FaithGen\Gallery\Http\Resources\Album as AlbumResource;
 use FaithGen\Gallery\Http\Resources\Image as ImageResource;
-use FaithGen\Gallery\Services\AlbumService;
-use Intervention\Image\ImageManager;
+use FaithGen\Gallery\Http\Requests\Album\DeleteImageRequest;
+use FaithGen\SDK\Http\Resources\Comment as CommentsResource;
 
 class AlbumController extends Controller
 {
@@ -101,5 +105,12 @@ class AlbumController extends Controller
         } catch (\Exception $e) {
             abort(500, $e->getMessage());
         }
+    }
+
+    public function comments(Request $request, Album $album)
+    {
+        $comments = $album->comments()->latest()->paginate(Helper::getLimit($request));
+        CommentsResource::wrap('comments');
+        return CommentsResource::collection($comments);
     }
 }
