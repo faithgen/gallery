@@ -1,6 +1,6 @@
 <?php
 
-namespace FaithGen\Gallery\Http\Requests\Album;
+namespace FaithGen\Gallery\Http\Requests;
 
 use FaithGen\Gallery\Helpers\AlbumHelper;
 use FaithGen\Gallery\Services\AlbumService;

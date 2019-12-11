@@ -7,19 +7,19 @@ use FaithGen\Gallery\Models\Album;
 use App\Http\Controllers\Controller;
 use InnoFlash\LaraStart\Http\Helper;
 use Intervention\Image\ImageManager;
+use FaithGen\SDK\Helpers\CommentHelper;
 use FaithGen\Gallery\Services\AlbumService;
 use FaithGen\SDK\Http\Requests\IndexRequest;
 use FaithGen\Gallery\Events\Album\ImageSaved;
+use FaithGen\Gallery\Http\Requests\GetRequest;
+use FaithGen\Gallery\Http\Requests\CreateRequest;
+use FaithGen\Gallery\Http\Requests\ImagesRequest;
+use FaithGen\Gallery\Http\Requests\UpdateRequest;
 use FaithGen\Gallery\Http\Requests\CommentRequest;
-use FaithGen\Gallery\Http\Requests\Album\GetRequest;
-use FaithGen\Gallery\Http\Requests\Album\CreateRequest;
-use FaithGen\Gallery\Http\Requests\Album\ImagesRequest;
-use FaithGen\Gallery\Http\Requests\Album\UpdateRequest;
-use FaithGen\Gallery\Http\Requests\Album\AddImagesRequest;
+use FaithGen\Gallery\Http\Requests\AddImagesRequest;
+use FaithGen\Gallery\Http\Requests\DeleteImageRequest;
 use FaithGen\Gallery\Http\Resources\Album as AlbumResource;
 use FaithGen\Gallery\Http\Resources\Image as ImageResource;
-use FaithGen\Gallery\Http\Requests\Album\DeleteImageRequest;
-use FaithGen\SDK\Helpers\CommentHelper;
 
 class AlbumController extends Controller
 {
@@ -100,6 +100,7 @@ class AlbumController extends Controller
 
     public function comments(Request $request, Album $album)
     {
+        $this->authorize('album.view', $album);
         return CommentHelper::getComments($album, $request);
     }
 }

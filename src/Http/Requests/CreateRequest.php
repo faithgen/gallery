@@ -1,6 +1,6 @@
 <?php
 
-namespace FaithGen\Gallery\Http\Requests\Album;
+namespace FaithGen\Gallery\Http\Requests;
 
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
