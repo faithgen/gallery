@@ -2,11 +2,11 @@
 
 namespace App\Listeners\Album\ImageSaved;
 
-use App\Events\Album\ImageSaved;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use FaithGen\Gallery\Events\Album\ImageSaved;
 
-class S3Upload
+class S3Upload implements ShouldQueue
 {
     /**
      * Create the event listener.
