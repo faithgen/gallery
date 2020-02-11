@@ -4,8 +4,7 @@ namespace FaithGen\Gallery\Http\Controllers;
 
 use Illuminate\Http\Request;
 use FaithGen\Gallery\Models\Album;
-use App\Http\Controllers\Controller;
-use InnoFlash\LaraStart\Http\Helper;
+use Illuminate\Routing\Controller;
 use Intervention\Image\ImageManager;
 use FaithGen\SDK\Helpers\CommentHelper;
 use FaithGen\Gallery\Services\AlbumService;
@@ -20,9 +19,13 @@ use FaithGen\Gallery\Http\Requests\AddImagesRequest;
 use FaithGen\Gallery\Http\Requests\DeleteImageRequest;
 use FaithGen\Gallery\Http\Resources\Album as AlbumResource;
 use FaithGen\Gallery\Http\Resources\Image as ImageResource;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use InnoFlash\LaraStart\Traits\APIResponses;
 
 class AlbumController extends Controller
 {
+    use AuthorizesRequests, APIResponses;
+
     /**
      * @var AlbumService
      */
