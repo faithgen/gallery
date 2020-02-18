@@ -19,6 +19,8 @@ use FaithGen\Gallery\Http\Requests\AddImagesRequest;
 use FaithGen\Gallery\Http\Requests\DeleteImageRequest;
 use FaithGen\Gallery\Http\Resources\Album as AlbumResource;
 use FaithGen\Gallery\Http\Resources\Image as ImageResource;
+use FaithGen\Gallery\Jobs\ImageSaved\ProcessUploadedImage;
+use FaithGen\Gallery\Jobs\ImageSaved\S3Upload;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use InnoFlash\LaraStart\Traits\APIResponses;
 
@@ -76,7 +78,9 @@ class AlbumController extends Controller
         $image = $this->albumService->getAlbum()->images()->create([
             'name' => $fileName
         ]);
-        event(new ImageSaved($image));
+        ProcessUploadedImage::withChain([
+            new S3Upload($image)
+        ])->dispatch($image);
         return $this->successResponse('Image uploaded');
     }
 

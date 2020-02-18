@@ -16,7 +16,7 @@ class AddImagesRequest extends FormRequest
      */
     public function authorize(AlbumService $albumService)
     {
-        return $this->user()->can('album.add.images', $albumService->getAlbum);
+        return $this->user()->can('addImages', $albumService->getAlbum());
     }
 
     /**
