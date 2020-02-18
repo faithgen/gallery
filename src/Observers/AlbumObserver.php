@@ -5,7 +5,6 @@ namespace FaithGen\Gallery\Observers\Ministry;
 use FaithGen\Gallery\Models\Album;
 use Illuminate\Support\Facades\DB;
 use FaithGen\SDK\Traits\FileTraits;
-use FaithGen\Gallery\Events\Album\Created;
 use FaithGen\Gallery\Jobs\MessageFollowers;
 
 class AlbumObserver

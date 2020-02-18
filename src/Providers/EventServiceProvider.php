@@ -7,10 +7,6 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 class EventServiceProvider extends ServiceProvider
 {
     protected $listen = [
-        \FaithGen\Gallery\Events\Album\ImageSaved::class => [
-            \FaithGen\Gallery\Listeners\Album\ImageSaved\ProcessImage::class,
-            \FaithGen\Gallery\Listeners\Album\ImageSaved\S3Upload::class,
-        ],
         \FaithGen\Gallery\Events\Album\Created::class => [
             \FaithGen\Gallery\Listeners\Album\Created\MessageFollowUsers::class,
         ],
