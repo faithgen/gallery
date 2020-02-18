@@ -16,7 +16,7 @@ class DeleteImageRequest extends FormRequest
      */
     public function authorize(AlbumService $albumService)
     {
-        return $this->user()->can('album.delete', $albumService->getAlbum());
+        return $this->user()->can('delete', $albumService->getAlbum());
     }
 
     /**
