@@ -42,10 +42,10 @@ class AlbumPolicy
      * @param \App\Models\Ministry $user
      * @return mixed
      */
-    public static function create(Ministry $user)
+    public function create(Ministry $user)
     {
         $albumsCount = Album::where('ministry_id', $user->id)->whereBetween('created_at', [Carbon::now()->firstOfMonth(), Carbon::now()->lastOfMonth()])->count();
-        return static::getAuthorization($user, $albumsCount, 'albums');
+        return $this->getAuthorization($user, $albumsCount, 'albums');
     }
 
     /**
@@ -91,7 +91,7 @@ class AlbumPolicy
         }
     }
 
-    private static function getAuthorization(Ministry $ministry, int $count, string $type): bool
+    private function getAuthorization(Ministry $ministry, int $count, string $type): bool
     {
         if (strcmp($type, 'albums') === 0) {
             $freeCount = AlbumHelper::$freeAlbumsCount;
