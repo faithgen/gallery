@@ -33,7 +33,6 @@ class AlbumPolicy
      */
     public function view(Ministry $user, Album $album)
     {
-        dd($user->id, $album->ministry_id);
         return $user->id === $album->ministry_id;
     }
 
