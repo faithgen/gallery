@@ -109,7 +109,7 @@ class AlbumController extends Controller
 
     public function comments(Request $request, Album $album)
     {
-        $this->authorize('album.view', $album);
+        $this->authorize('view', $album);
         return CommentHelper::getComments($album, $request);
     }
 }
