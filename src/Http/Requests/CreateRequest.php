@@ -2,6 +2,7 @@
 
 namespace FaithGen\Gallery\Http\Requests;
 
+use FaithGen\Gallery\Models\Album;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -14,7 +15,7 @@ class CreateRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('album.create');
+        return $this->user()->can('create', Album::class);
     }
 
     /**
