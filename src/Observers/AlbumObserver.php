@@ -2,10 +2,11 @@
 
 namespace FaithGen\Gallery\Observers\Ministry;
 
-use App\Events\Album\Created;
 use FaithGen\Gallery\Models\Album;
-use FaithGen\SDK\Traits\FileTraits;
 use Illuminate\Support\Facades\DB;
+use FaithGen\SDK\Traits\FileTraits;
+use FaithGen\Gallery\Events\Album\Created;
+use FaithGen\Gallery\Jobs\MessageFollowers;
 
 class AlbumObserver
 {
@@ -19,7 +20,8 @@ class AlbumObserver
      */
     public function created(Album $album)
     {
-        event(new Created($album));
+        //event(new Created($album));
+        MessageFollowers::dispatch();
     }
 
     /**

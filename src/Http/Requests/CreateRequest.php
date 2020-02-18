@@ -14,6 +14,7 @@ class CreateRequest extends FormRequest
      */
     public function authorize()
     {
+      //  dd($this->user());
         return $this->user()->can('album.create');
     }
 
@@ -34,8 +35,7 @@ class CreateRequest extends FormRequest
     {
         if (strcmp(auth()->user()->account->level, 'Free') === 0)
             $message = 'You need to upgrade to able to create more than one album this month';
-        else
-            $message = 'You need to upgrade further to be able to create more than 5 albums this month';
+        else $message = 'You need to upgrade further to be able to create more than 5 albums this month';
         throw new AuthorizationException($message, 403);
     }
 }

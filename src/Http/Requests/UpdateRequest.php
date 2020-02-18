@@ -16,7 +16,7 @@ class UpdateRequest extends FormRequest
      */
     public function authorize(AlbumService $albumService)
     {
-        return $this->user()->can('album.update', $albumService->getAlbum());
+        return $this->user()->can('update', $albumService->getAlbum());
     }
 
     /**

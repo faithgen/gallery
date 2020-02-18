@@ -41,6 +41,7 @@ class AlbumController extends Controller
         $albums = $this->albumService->getParentRelationship()->where('name', 'LIKE', '%' . $request->filter_text . '%')
             ->latest()
             ->paginate($request->has('limit') ? $request->limit : 15);
+	AlbumResource::wrap('albums');
         return AlbumResource::collection($albums);
     }
 
@@ -63,6 +64,7 @@ class AlbumController extends Controller
     {
         $images = $this->albumService->getAlbum()->images()->latest()
             ->paginate($request->has('limit') ? $request->limit : 15);
+	ImageResource::wrap('images');
         return ImageResource::collection($images);
     }
 

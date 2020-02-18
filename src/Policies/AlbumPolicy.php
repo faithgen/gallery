@@ -19,7 +19,7 @@ class AlbumPolicy
      * @param \App\Models\Ministry $user
      * @return mixed
      */
-    public static function viewAny(Ministry $user)
+    public function viewAny(Ministry $user)
     {
         //
     }
@@ -31,8 +31,9 @@ class AlbumPolicy
      * @param Album $album
      * @return mixed
      */
-    public static function view(Ministry $user, Album $album)
+    public function view(Ministry $user, Album $album)
     {
+        dd($user->id, $album->ministry_id);
         return $user->id === $album->ministry_id;
     }
 
@@ -45,7 +46,7 @@ class AlbumPolicy
     public static function create(Ministry $user)
     {
         $albumsCount = Album::where('ministry_id', $user->id)->whereBetween('created_at', [Carbon::now()->firstOfMonth(), Carbon::now()->lastOfMonth()])->count();
-        return self::getAuthorization($user, $albumsCount, 'albums');
+        return static::getAuthorization($user, $albumsCount, 'albums');
     }
 
     /**
@@ -55,7 +56,7 @@ class AlbumPolicy
      * @param Album $album
      * @return mixed
      */
-    public static function update(Ministry $user, Album $album)
+    public function update(Ministry $user, Album $album)
     {
         return $user->id === $album->ministry_id;
     }
@@ -67,12 +68,12 @@ class AlbumPolicy
      * @param Album $album
      * @return mixed
      */
-    public static function delete(Ministry $user, Album $album)
+    public function delete(Ministry $user, Album $album)
     {
         return $user->id === $album->ministry_id;
     }
 
-    public static function addImages(Ministry $ministry, Album $album)
+    public function addImages(Ministry $ministry, Album $album)
     {
         $albumSize = $album->images()->count();
         if (strcmp($ministry->id, $album->ministry_id) !== 0) return false;
