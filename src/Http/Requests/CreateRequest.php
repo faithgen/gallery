@@ -14,7 +14,6 @@ class CreateRequest extends FormRequest
      */
     public function authorize()
     {
-      //  dd($this->user());
         return $this->user()->can('album.create');
     }
 

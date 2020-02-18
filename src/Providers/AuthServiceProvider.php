@@ -16,11 +16,10 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+        
         //albums gates
          Gate::define('album.create', [AlbumPolicy::class, 'create']);
         // Gate::define('album.update', [AlbumPolicy::class, 'update']);
-        // Gate::define('album.delete', [AlbumPolicy::class, 'delete']);
-        // Gate::define('album.view', [AlbumPolicy::class, 'view']);
         // Gate::define('album.add.images', [AlbumPolicy::class, 'addImages']);
     }
 
