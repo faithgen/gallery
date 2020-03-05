@@ -4,13 +4,14 @@ namespace FaithGen\Gallery\Http\Resources;
 
 use FaithGen\Gallery\Helpers\AlbumHelper;
 use Illuminate\Http\Resources\Json\JsonResource;
+use InnoFlash\LaraStart\Http\Helper;
 
 class Image extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function toArray($request)
@@ -20,7 +21,7 @@ class Image extends JsonResource
             'caption' => $this->caption,
             'comments' => $this->comments()->count(),
             'avatar' => AlbumHelper::getImageLinks($this->resource),
-            'date' => AlbumHelper::getDates($this->created_at)
+            'date' => Helper::getDates($this->created_at)
         ];
     }
 }

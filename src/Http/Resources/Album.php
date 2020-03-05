@@ -4,6 +4,7 @@ namespace FaithGen\Gallery\Http\Resources;
 
 use FaithGen\Gallery\Helpers\AlbumHelper;
 use Illuminate\Http\Resources\Json\JsonResource;
+use InnoFlash\LaraStart\Http\Helper;
 
 class Album extends JsonResource
 {
@@ -20,7 +21,7 @@ class Album extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'comments' => $this->comments()->count(),
-            'date' => AlbumHelper::getDates($this->created_at),
+            'date' => Helper::getDates($this->created_at),
             'images' => [
                 'count' => $this->images()->count()
             ],
