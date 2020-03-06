@@ -49,7 +49,7 @@ class AlbumController extends Controller
 
     function create(CreateRequest $request)
     {
-        return $this->albumService->createFromRelationship($request->validated(), 'Album created!');
+        return $this->albumService->createFromParent($request->validated(), 'Album created!');
     }
 
     function update(UpdateRequest $request)
