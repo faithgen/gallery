@@ -25,7 +25,7 @@ class GalleryServiceProvider extends ServiceProvider
         $this->setUpSourceFiles(function () {
             $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
             $this->publishes([
-                __DIR__ . '/../storage/gallery/' => storage_path('app/public/gallery')
+                __DIR__ . '/../../storage/gallery/' => storage_path('app/public/gallery')
             ], 'faithgen-gallery-storage');
 
             $this->publishes([
