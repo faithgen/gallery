@@ -20,7 +20,7 @@ class GalleryServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->registerRoutes(__DIR__ . '/../routes/gallery.php', __DIR__ . '/../routes/source.php');
+        $this->registerRoutes(__DIR__ . '/../../routes/gallery.php', __DIR__ . '/../../routes/source.php');
 
         $this->setUpSourceFiles(function () {
             $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
@@ -38,7 +38,6 @@ class GalleryServiceProvider extends ServiceProvider
         ], 'faithgen-gallery-config');
 
         Album::observe(AlbumObserver::class);
-
     }
 
     /**
@@ -49,7 +48,7 @@ class GalleryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/../../config/faithgen-gallery.php', 'faithgen-gallery');
-        $this->app->singleton(AlbumService::class, AlbumService::class);
+        $this->app->singleton(AlbumService::class);
     }
 
     /**
