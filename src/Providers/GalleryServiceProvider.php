@@ -38,7 +38,7 @@ class GalleryServiceProvider extends ServiceProvider
         ], 'faithgen-gallery-config');
 
         Album::observe(AlbumObserver::class);
-        
+
     }
 
     /**
@@ -48,8 +48,8 @@ class GalleryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/faithgen-gallery.php', 'faithgen-gallery');
-	$this->app->singleton(AlbumService::class, AlbumService::class);        
+        $this->mergeConfigFrom(__DIR__ . '/../../config/faithgen-gallery.php', 'faithgen-gallery');
+        $this->app->singleton(AlbumService::class, AlbumService::class);
     }
 
     /**
