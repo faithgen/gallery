@@ -23,13 +23,13 @@ class GalleryServiceProvider extends ServiceProvider
         $this->registerRoutes(__DIR__ . '/../routes/gallery.php', __DIR__ . '/../routes/source.php');
 
         $this->setUpSourceFiles(function () {
-            $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+            $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
             $this->publishes([
                 __DIR__ . '/../storage/gallery/' => storage_path('app/public/gallery')
             ], 'faithgen-gallery-storage');
 
             $this->publishes([
-                __DIR__ . '/../database/migrations/' => database_path('migrations'),
+                __DIR__ . '/../../database/migrations/' => database_path('migrations'),
             ], 'faithgen-gallery-migrations');
         });
 
