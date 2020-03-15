@@ -34,7 +34,7 @@ class GalleryServiceProvider extends ServiceProvider
         });
 
         $this->publishes([
-            __DIR__ . '/../config/faithgen-gallery.php' => config_path('faithgen-gallery.php'),
+            __DIR__ . '/../../config/faithgen-gallery.php' => config_path('faithgen-gallery.php'),
         ], 'faithgen-gallery-config');
 
         Album::observe(AlbumObserver::class);
