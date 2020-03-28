@@ -1,6 +1,6 @@
 <?php
 
-namespace FaithGen\Gallery\Observers\Ministry;
+namespace FaithGen\Gallery\Observers;
 
 use FaithGen\Gallery\Models\Album;
 use Illuminate\Support\Facades\DB;

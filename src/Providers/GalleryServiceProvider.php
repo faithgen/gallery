@@ -3,10 +3,9 @@
 namespace FaithGen\Gallery\Providers;
 
 use FaithGen\Gallery\Models\Album;
-use FaithGen\Gallery\Observers\Ministry\AlbumObserver;
+use FaithGen\Gallery\Observers\AlbumObserver;
 use FaithGen\Gallery\Services\AlbumService;
 use FaithGen\SDK\Traits\ConfigTrait;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class GalleryServiceProvider extends ServiceProvider
