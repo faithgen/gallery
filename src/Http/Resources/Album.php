@@ -2,7 +2,7 @@
 
 namespace FaithGen\Gallery\Http\Resources;
 
-use FaithGen\Gallery\Helpers\AlbumHelper;
+use FaithGen\SDK\Helpers\ImageHelper;
 use Illuminate\Http\Resources\Json\JsonResource;
 use InnoFlash\LaraStart\Helper;
 
@@ -25,10 +25,7 @@ class Album extends JsonResource
             'images' => [
                 'count' => $this->images()->count()
             ],
-            'avatar' => [
-                '_100' => $this->images()->exists() ? AlbumHelper::getAlbumIcon($this->resource, 100) : asset('images/folder.png'),
-                'original' => $this->images()->exists() ? AlbumHelper::getAlbumIcon($this->resource) : asset('images/folder.png')
-            ]
+            'avatar' => ImageHelper::getImage('gallery', $this->images()->latest()->first(), config('faithgen-sdk.ministries-server'))
         ];
     }
 }

@@ -47,6 +47,7 @@ class GalleryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/../../config/faithgen-gallery.php', 'faithgen-gallery');
+
         $this->app->singleton(AlbumService::class);
     }
 
@@ -58,7 +59,6 @@ class GalleryServiceProvider extends ServiceProvider
     {
         return [
             'prefix' => config('faithgen-gallery.prefix'),
-            'namespace' => "FaithGen\Gallery\Http\Controllers",
             'middleware' => config('faithgen-gallery.middlewares'),
         ];
     }
