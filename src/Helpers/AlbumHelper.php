@@ -2,10 +2,7 @@
 
 namespace FaithGen\Gallery\Helpers;
 
-use FaithGen\Gallery\Models\Album;
 use FaithGen\SDK\Helpers\Helper;
-use FaithGen\SDK\Models\Image;
-use FaithGen\SDK\SDK;
 
 class AlbumHelper extends Helper
 {
