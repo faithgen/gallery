@@ -44,9 +44,9 @@ class AlbumController extends Controller
      * @param IndexRequest $request
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    function index(IndexRequest $request)
+    public function index(IndexRequest $request)
     {
-        $albums = $this->albumService->getParentRelationship()->where('name', 'LIKE', '%' . $request->filter_text . '%')
+        $albums = $this->albumService->getParentRelationship()->where('name', 'LIKE', '%'.$request->filter_text.'%')
             ->latest()
             ->paginate($request->has('limit') ? $request->limit : 15);
 
@@ -61,7 +61,7 @@ class AlbumController extends Controller
      * @param CreateRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    function create(CreateRequest $request)
+    public function create(CreateRequest $request)
     {
         return $this->albumService->createFromParent($request->validated(), 'Album created!');
     }
@@ -72,7 +72,7 @@ class AlbumController extends Controller
      * @param UpdateRequest $request
      * @return \Illuminate\Http\JsonResponse|mixed
      */
-    function update(UpdateRequest $request)
+    public function update(UpdateRequest $request)
     {
         return $this->albumService->update($request->validated());
     }
@@ -83,7 +83,7 @@ class AlbumController extends Controller
      * @param GetRequest $request
      * @return mixed
      */
-    function destroy(GetRequest $request)
+    public function destroy(GetRequest $request)
     {
         return $this->albumService->destroy();
     }
@@ -94,7 +94,7 @@ class AlbumController extends Controller
      * @param ImagesRequest $request
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    function view(ImagesRequest $request)
+    public function view(ImagesRequest $request)
     {
         $images = $this->albumService
             ->getAlbum()
@@ -114,19 +114,19 @@ class AlbumController extends Controller
      * @param ImageManager $imageManager
      * @return mixed
      */
-    function addImage(AddImagesRequest $request, ImageManager $imageManager)
+    public function addImage(AddImagesRequest $request, ImageManager $imageManager)
     {
-        $fileName = str_shuffle($this->albumService->getAlbum()->id . time() . time()) . '.png';
-        $ogSave = storage_path('app/public/gallery/original/') . $fileName;
+        $fileName = str_shuffle($this->albumService->getAlbum()->id.time().time()).'.png';
+        $ogSave = storage_path('app/public/gallery/original/').$fileName;
 
         $imageManager->make($request->file('images'))->save($ogSave);
 
         $image = $this->albumService->getAlbum()->images()->create([
-            'name' => $fileName
+            'name' => $fileName,
         ]);
 
         ProcessUploadedImage::withChain([
-            new S3Upload($image)
+            new S3Upload($image),
         ])->dispatch($image);
 
         return $this->successResponse('Image uploaded');
@@ -138,14 +138,15 @@ class AlbumController extends Controller
      * @param DeleteImageRequest $request
      * @return mixed
      */
-    function destroyImage(DeleteImageRequest $request)
+    public function destroyImage(DeleteImageRequest $request)
     {
         $image = $this->albumService->getAlbum()->images()->findOrFail($request->image_id);
 
         try {
-            unlink(storage_path('app/public/gallery/100-100/' . $image->name));
-            unlink(storage_path('app/public/gallery/original/' . $image->name));
+            unlink(storage_path('app/public/gallery/100-100/'.$image->name));
+            unlink(storage_path('app/public/gallery/original/'.$image->name));
             $image->delete();
+
             return $this->successResponse('Image deleted!');
         } catch (\Exception $e) {
             abort(500, $e->getMessage());

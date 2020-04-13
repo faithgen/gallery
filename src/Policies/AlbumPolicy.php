@@ -5,7 +5,6 @@ namespace FaithGen\Gallery\Policies;
 use Carbon\Carbon;
 use FaithGen\Gallery\Helpers\AlbumHelper;
 use FaithGen\Gallery\Models\Album;
-use FaithGen\SDK\Helpers\Helper;
 use FaithGen\SDK\Models\Ministry;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -45,12 +44,13 @@ class AlbumPolicy
     public function create(Ministry $user)
     {
         $albumsCount = Album::where('ministry_id', $user->id)->whereBetween('created_at', [Carbon::now()->firstOfMonth(), Carbon::now()->lastOfMonth()])->count();
+
         return $this->getAuthorization($user, $albumsCount, 'albums');
     }
 
     /**
      * Determine whether the user can update the album.
-     *if
+     *if.
      * @param Ministry $user
      * @param Album $album
      * @return mixed
@@ -75,15 +75,21 @@ class AlbumPolicy
     public function addImages(Ministry $ministry, Album $album)
     {
         $albumSize = $album->images()->count();
-        if (strcmp($ministry->id, $album->ministry_id) !== 0) return false;
-        else {
+        if (strcmp($ministry->id, $album->ministry_id) !== 0) {
+            return false;
+        } else {
             return self::getAuthorization($ministry, $albumSize, 'images');
             $allow = self::getAuthorization($ministry, $albumSize, 'images');
-            if (!$allow) return false;
-            else {
-                if ($ministry->account->level === 'Free') $balance = AlbumHelper::$freeAlbumImagesCount - $albumSize;
-                else if ($ministry->account->level === 'Premium') $balance = AlbumHelper::$premiumAlbumImagesCount - $albumSize;
-                else $balance = 10000;
+            if (! $allow) {
+                return false;
+            } else {
+                if ($ministry->account->level === 'Free') {
+                    $balance = AlbumHelper::$freeAlbumImagesCount - $albumSize;
+                } elseif ($ministry->account->level === 'Premium') {
+                    $balance = AlbumHelper::$premiumAlbumImagesCount - $albumSize;
+                } else {
+                    $balance = 10000;
+                }
 
                 return true;
                 //return sizeof(request()->images) > $balance;
@@ -101,11 +107,19 @@ class AlbumPolicy
             $premiumCount = AlbumHelper::$premiumAlbumImagesCount;
         }
         if ($ministry->account->level === 'Free') {
-            if ($count >= $freeCount) return false;
-            else return true;
-        } else if ($ministry->account->level === 'Premium') {
-            if ($count >= $premiumCount) return false;
-            else return true;
-        } else return true;
+            if ($count >= $freeCount) {
+                return false;
+            } else {
+                return true;
+            }
+        } elseif ($ministry->account->level === 'Premium') {
+            if ($count >= $premiumCount) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
     }
 }

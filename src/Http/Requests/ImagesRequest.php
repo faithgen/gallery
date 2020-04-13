@@ -2,8 +2,8 @@
 
 namespace FaithGen\Gallery\Http\Requests;
 
-use FaithGen\SDK\Helpers\Helper;
 use FaithGen\Gallery\Services\AlbumService;
+use FaithGen\SDK\Helpers\Helper;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -16,8 +16,8 @@ class ImagesRequest extends FormRequest
      */
     public function authorize(AlbumService $albumService)
     {
-        return $albumService->getAlbum() 
-		&& $this->user()->can('view', $albumService->getAlbum());
+        return $albumService->getAlbum()
+        && $this->user()->can('view', $albumService->getAlbum());
     }
 
     /**
@@ -30,11 +30,11 @@ class ImagesRequest extends FormRequest
         return [
             'limit' => 'integer|min:1',
             'filter_text' => 'sometimes:string',
-            'album_id' => Helper::$idValidation
+            'album_id' => Helper::$idValidation,
         ];
     }
 
-    function failedAuthorization()
+    public function failedAuthorization()
     {
         throw new AuthorizationException('You are not allowed to view this album');
     }

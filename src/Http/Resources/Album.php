@@ -23,9 +23,9 @@ class Album extends JsonResource
             'comments' => $this->comments()->count(),
             'date' => Helper::getDates($this->created_at),
             'images' => [
-                'count' => $this->images()->count()
+                'count' => $this->images()->count(),
             ],
-            'avatar' => ImageHelper::getImage('gallery', $this->images()->latest()->first(), config('faithgen-sdk.ministries-server'))
+            'avatar' => ImageHelper::getImage('gallery', $this->images()->latest()->first(), config('faithgen-sdk.ministries-server')),
         ];
     }
 }

@@ -21,7 +21,7 @@ class Image extends JsonResource
             'caption' => $this->caption,
             'comments' => $this->comments()->count(),
             'avatar' => AlbumHelper::getImageLinks($this->resource),
-            'date' => Helper::getDates($this->created_at)
+            'date' => Helper::getDates($this->created_at),
         ];
     }
 }

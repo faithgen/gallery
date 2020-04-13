@@ -17,7 +17,10 @@ class CommentRequest extends FormRequest
      */
     public function authorize(AlbumService $albumService)
     {
-        if (auth()->user() instanceof Ministry) return $this->user()->can('view', $albumService->getAlbum());
+        if (auth()->user() instanceof Ministry) {
+            return $this->user()->can('view', $albumService->getAlbum());
+        }
+
         return true;
     }
 
@@ -30,11 +33,11 @@ class CommentRequest extends FormRequest
     {
         return [
             'album_id' => Helper::$idValidation,
-            'comment' => 'required'
+            'comment' => 'required',
         ];
     }
 
-    function failedAuthorization()
+    public function failedAuthorization()
     {
         throw new AuthorizationException('You do not have access to this album');
     }

@@ -1,13 +1,14 @@
 <?php
+
 namespace FaithGen\Gallery\Jobs\ImageSaved;
 
-use Illuminate\Bus\Queueable;
 use FaithGen\SDK\Models\Image;
-use Intervention\Image\ImageManager;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Intervention\Image\ImageManager;
 
 class ProcessUploadedImage implements ShouldQueue
 {
@@ -33,8 +34,8 @@ class ProcessUploadedImage implements ShouldQueue
      */
     public function handle(ImageManager $imageManager)
     {
-        $ogImage = storage_path('app/public/gallery/original/') . $this->image->name;
-        $thumb100 = storage_path('app/public/gallery/100-100/') . $this->image->name;
+        $ogImage = storage_path('app/public/gallery/original/').$this->image->name;
+        $thumb100 = storage_path('app/public/gallery/100-100/').$this->image->name;
 
         $imageManager->make($ogImage)->fit(100, 100, function ($constraint) {
             $constraint->upsize();

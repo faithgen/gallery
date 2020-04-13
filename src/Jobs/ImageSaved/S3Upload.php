@@ -13,7 +13,6 @@ class S3Upload implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-
     public $deleteWhenMissingModels = true;
     protected $image;
 
