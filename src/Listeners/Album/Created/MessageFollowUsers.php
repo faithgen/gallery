@@ -3,7 +3,6 @@
 namespace FaithGen\Gallery\Listeners\Album\Created;
 
 use FaithGen\Gallery\Events\Album\Created;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 class MessageFollowUsers implements ShouldQueue

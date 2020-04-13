@@ -2,10 +2,10 @@
 
 namespace FaithGen\Gallery\Observers;
 
-use FaithGen\Gallery\Models\Album;
-use Illuminate\Support\Facades\DB;
-use FaithGen\SDK\Traits\FileTraits;
 use FaithGen\Gallery\Jobs\MessageFollowers;
+use FaithGen\Gallery\Models\Album;
+use FaithGen\SDK\Traits\FileTraits;
+use Illuminate\Support\Facades\DB;
 
 class AlbumObserver
 {

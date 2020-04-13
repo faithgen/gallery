@@ -11,6 +11,7 @@ class EventServiceProvider extends ServiceProvider
             \FaithGen\Gallery\Listeners\Album\Created\MessageFollowUsers::class,
         ],
     ];
+
     /**
      * Bootstrap services.
      *

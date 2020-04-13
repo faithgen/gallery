@@ -1,8 +1,6 @@
 <?php
 
-
 namespace FaithGen\Gallery\Services;
-
 
 use FaithGen\Gallery\Models\Album;
 use InnoFlash\LaraStart\Services\CRUDServices;
@@ -16,10 +14,11 @@ class AlbumService extends CRUDServices
 
     public function __construct(Album $album)
     {
-        if (request()->has('album_id'))
+        if (request()->has('album_id')) {
             $this->album = Album::findOrFail(request()->album_id);
-        else
+        } else {
             $this->album = $album;
+        }
     }
 
     /**
@@ -30,21 +29,20 @@ class AlbumService extends CRUDServices
         return $this->album;
     }
 
-
     /**
-     * This sets the attributes to be removed from the given set for updating or creating
+     * This sets the attributes to be removed from the given set for updating or creating.
      * @return mixed
      */
-    function getUnsetFields()
+    public function getUnsetFields()
     {
         return ['album_id'];
     }
 
     /**
-     * This get the model value or class of the model in the service
+     * This get the model value or class of the model in the service.
      * @return mixed
      */
-    function getModel()
+    public function getModel()
     {
         return $this->getAlbum();
     }

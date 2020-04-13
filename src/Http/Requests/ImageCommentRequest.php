@@ -26,7 +26,7 @@ class ImageCommentRequest extends FormRequest
     {
         return [
             'image_id' => Helper::$idValidation,
-            'comment' => 'required'
+            'comment' => 'required',
         ];
     }
 }
