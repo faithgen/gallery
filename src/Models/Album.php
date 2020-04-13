@@ -13,6 +13,8 @@ class Album extends UuidModel
 {
     use  ImageableTrait, BelongsToMinistryTrait, StorageTrait, TitleTrait, CommentableTrait;
 
+    protected $table = 'fg_albums';
+
     //****************************************************************************//
     //***************************** MODEL ATTRIBUTES *****************************//
     //****************************************************************************//
