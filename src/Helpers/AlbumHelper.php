@@ -13,22 +13,4 @@ class AlbumHelper extends Helper
     public static $freeAlbumImagesCount = 10;
     public static $premiumAlbumsCount = 5;
     public static $premiumAlbumImagesCount = 20;
-
-    public static function getAlbumIcon(Album $album, int $dimen = 0)
-    {
-        $image = $album->images()->select(['name'])->latest()->first();
-        if ($dimen) {
-            return SDK::getAsset('storage/gallery/100-100/'.$image->name);
-        } else {
-            return SDK::getAsset('storage/gallery/original/'.$image->name);
-        }
-    }
-
-    public static function getImageLinks(Image $image)
-    {
-        return [
-            'thumb' => SDK::getAsset('storage/gallery/100-100/'.$image->name),
-            'original' => SDK::getAsset('storage/gallery/original/'.$image->name),
-        ];
-    }
 }

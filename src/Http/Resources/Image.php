@@ -3,6 +3,7 @@
 namespace FaithGen\Gallery\Http\Resources;
 
 use FaithGen\Gallery\Helpers\AlbumHelper;
+use FaithGen\SDK\Helpers\ImageHelper;
 use Illuminate\Http\Resources\Json\JsonResource;
 use InnoFlash\LaraStart\Helper;
 
@@ -20,7 +21,7 @@ class Image extends JsonResource
             'id' => $this->id,
             'caption' => $this->caption,
             'comments' => $this->comments()->count(),
-            'avatar' => AlbumHelper::getImageLinks($this->resource),
+            'avatar' => ImageHelper::getImage('gallery', $this->resource, config('faithgen-sdk.ministries-server')),
             'date' => Helper::getDates($this->created_at),
         ];
     }
