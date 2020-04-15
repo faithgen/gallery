@@ -3,6 +3,7 @@
     "description": "This is the Gallery plugin for FaithGen system",
     "type": "library",
     "require": {
+        "php": "^7.4",
         "intervention/image": "^2.5",
         "faithgen/sdk": "^2.0",
         "crazybooot/base64-validation": "^1.0",
