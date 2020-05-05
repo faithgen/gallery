@@ -3,6 +3,7 @@
 namespace FaithGen\Gallery\Jobs\ImageSaved;
 
 use FaithGen\SDK\Models\Image;
+use FaithGen\SDK\Traits\ProcessesImages;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -15,7 +16,8 @@ class ProcessUploadedImage implements ShouldQueue
     use Dispatchable,
         InteractsWithQueue,
         Queueable,
-        SerializesModels;
+        SerializesModels,
+        ProcessesImages;
 
     public bool $deleteWhenMissingModels = true;
     protected Image $image;
@@ -39,12 +41,6 @@ class ProcessUploadedImage implements ShouldQueue
      */
     public function handle(ImageManager $imageManager)
     {
-        $ogImage = storage_path('app/public/gallery/original/').$this->image->name;
-        $thumb100 = storage_path('app/public/gallery/100-100/').$this->image->name;
-
-        $imageManager->make($ogImage)->fit(100, 100, function ($constraint) {
-            $constraint->upsize();
-            $constraint->aspectRatio();
-        }, 'center')->save($thumb100);
+        $this->processImage($imageManager, $this->image);
     }
 }
