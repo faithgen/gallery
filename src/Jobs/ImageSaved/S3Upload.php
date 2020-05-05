@@ -19,13 +19,13 @@ class S3Upload implements ShouldQueue
         SerializesModels,
         SavesToAmazonS3;
 
-    public $deleteWhenMissingModels = true;
-    protected $image;
+    public bool $deleteWhenMissingModels = true;
+    protected Image $image;
 
     /**
      * Create a new job instance.
      *
-     * @return void
+     * @param Image $image
      */
     public function __construct(Image $image)
     {

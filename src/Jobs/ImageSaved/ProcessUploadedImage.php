@@ -12,15 +12,18 @@ use Intervention\Image\ImageManager;
 
 class ProcessUploadedImage implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable,
+        InteractsWithQueue,
+        Queueable,
+        SerializesModels;
 
-    public $deleteWhenMissingModels = true;
-    protected $image;
+    public bool $deleteWhenMissingModels = true;
+    protected Image $image;
 
     /**
      * Create a new job instance.
      *
-     * @return void
+     * @param Image $image
      */
     public function __construct(Image $image)
     {
@@ -29,6 +32,8 @@ class ProcessUploadedImage implements ShouldQueue
 
     /**
      * Execute the job.
+     *
+     * @param ImageManager $imageManager
      *
      * @return void
      */
