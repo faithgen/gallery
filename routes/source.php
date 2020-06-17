@@ -9,7 +9,7 @@ Route::name('albums.')
     ->group(function () {
         Route::post('/create', [AlbumController::class, 'create']);
         Route::post('/add-images/{album}', [AlbumController::class, 'addImage']);
-        Route::put('/update', [AlbumController::class, 'update']);
+        Route::put('/update/{album}', [AlbumController::class, 'update']);
         Route::delete('/delete', [AlbumController::class, 'destroy']);
         Route::delete('/delete-image', [AlbumController::class, 'destroyImage']);
     });

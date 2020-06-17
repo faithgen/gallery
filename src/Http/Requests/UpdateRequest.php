@@ -2,7 +2,6 @@
 
 namespace FaithGen\Gallery\Http\Requests;
 
-use FaithGen\Gallery\Helpers\AlbumHelper;
 use FaithGen\Gallery\Services\AlbumService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
@@ -11,6 +10,8 @@ class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
+     *
+     * @param  \FaithGen\Gallery\Services\AlbumService  $albumService
      *
      * @return bool
      */
@@ -27,8 +28,7 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'album_id' => AlbumHelper::$idValidation,
-            'name' => 'required|string',
+            'name'        => 'required|string',
             'description' => 'required|string',
         ];
     }
