@@ -10,19 +10,25 @@ class AlbumService extends CRUDServices
     /**
      * @var Album
      */
-    private $album;
+    protected Album $album;
 
-    public function __construct(Album $album)
+    public function __construct()
     {
+        $this->album = app(Album::class);
+
         if (request()->has('album_id')) {
-            $this->album = Album::findOrFail(request()->album_id);
-        } else {
-            $this->album = $album;
+            $this->album = Album::findOrFail(request('album_id'));
+        }
+
+        if (request()->route()->hasParameter('album')) {
+            $this->album = $this->album->resolveRouteBinding(request()->route('album'));
         }
     }
 
     /**
-     * @return Album
+     * Retrieves an instance of album.
+     *
+     * @return \FaithGen\Gallery\Models\Album
      */
     public function getAlbum(): Album
     {
@@ -30,21 +36,15 @@ class AlbumService extends CRUDServices
     }
 
     /**
-     * This sets the attributes to be removed from the given set for updating or creating.
-     * @return mixed
+     * Makes a list of fields that you do not want to be sent
+     * to the create or update methods.
+     * Its mainly the fields that you do not have in the messages table.
+     *
+     * @return array
      */
-    public function getUnsetFields()
+    public function getUnsetFields(): array
     {
         return ['album_id'];
-    }
-
-    /**
-     * This get the model value or class of the model in the service.
-     * @return mixed
-     */
-    public function getModel()
-    {
-        return $this->getAlbum();
     }
 
     public function getParentRelationship()
