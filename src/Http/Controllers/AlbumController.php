@@ -3,7 +3,6 @@
 namespace FaithGen\Gallery\Http\Controllers;
 
 use FaithGen\Gallery\Http\Requests\AddImagesRequest;
-use FaithGen\Gallery\Http\Requests\CommentRequest;
 use FaithGen\Gallery\Http\Requests\CreateRequest;
 use FaithGen\Gallery\Http\Requests\DeleteImageRequest;
 use FaithGen\Gallery\Http\Requests\GetRequest;
@@ -16,6 +15,7 @@ use FaithGen\Gallery\Jobs\ImageSaved\S3Upload;
 use FaithGen\Gallery\Models\Album;
 use FaithGen\Gallery\Services\AlbumService;
 use FaithGen\SDK\Helpers\CommentHelper;
+use FaithGen\SDK\Http\Requests\CommentRequest;
 use FaithGen\SDK\Http\Requests\IndexRequest;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
@@ -141,7 +141,7 @@ class AlbumController extends Controller
     /**
      * Removes an image from an album.
      *
-     * @param  DeleteImageRequest  $request     *
+     * @param  DeleteImageRequest  $request
      * @param  string  $image_id
      *
      * @return mixed
