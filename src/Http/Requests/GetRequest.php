@@ -2,7 +2,6 @@
 
 namespace FaithGen\Gallery\Http\Requests;
 
-use FaithGen\Gallery\Helpers\AlbumHelper;
 use FaithGen\Gallery\Services\AlbumService;
 use FaithGen\SDK\Models\Ministry;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -12,6 +11,8 @@ class GetRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
+     *
+     * @param  \FaithGen\Gallery\Services\AlbumService  $albumService
      *
      * @return bool
      */
@@ -31,9 +32,7 @@ class GetRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'album_id' => AlbumHelper::$idValidation,
-        ];
+        return [];
     }
 
     public function failedAuthorization()
