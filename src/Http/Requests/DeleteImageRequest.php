@@ -3,7 +3,6 @@
 namespace FaithGen\Gallery\Http\Requests;
 
 use FaithGen\Gallery\Services\AlbumService;
-use FaithGen\SDK\Helpers\Helper;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -11,6 +10,8 @@ class DeleteImageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
+     *
+     * @param  \FaithGen\Gallery\Services\AlbumService  $albumService
      *
      * @return bool
      */
@@ -26,10 +27,7 @@ class DeleteImageRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'album_id' => Helper::$idValidation,
-            'image_id' => Helper::$idValidation,
-        ];
+        return [];
     }
 
     public function failedAuthorization()

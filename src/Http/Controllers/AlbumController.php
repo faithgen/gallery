@@ -41,7 +41,8 @@ class AlbumController extends Controller
     /**
      * Gets the albums.
      *
-     * @param IndexRequest $request
+     * @param  IndexRequest  $request
+     *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index(IndexRequest $request)
@@ -58,7 +59,8 @@ class AlbumController extends Controller
     /**
      * Creates an album.
      *
-     * @param CreateRequest $request
+     * @param  CreateRequest  $request
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function create(CreateRequest $request)
@@ -69,7 +71,8 @@ class AlbumController extends Controller
     /**
      * Updates an album.
      *
-     * @param UpdateRequest $request
+     * @param  UpdateRequest  $request
+     *
      * @return \Illuminate\Http\JsonResponse|mixed
      */
     public function update(UpdateRequest $request)
@@ -80,7 +83,8 @@ class AlbumController extends Controller
     /**
      * Deletes an album.
      *
-     * @param GetRequest $request
+     * @param  GetRequest  $request
+     *
      * @return mixed
      */
     public function destroy(GetRequest $request)
@@ -91,7 +95,8 @@ class AlbumController extends Controller
     /**
      * Views images in an album.
      *
-     * @param ImagesRequest $request
+     * @param  ImagesRequest  $request
+     *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function view(ImagesRequest $request)
@@ -110,8 +115,9 @@ class AlbumController extends Controller
     /**
      * Adds an image to an album.
      *
-     * @param AddImagesRequest $request
-     * @param ImageManager $imageManager
+     * @param  AddImagesRequest  $request
+     * @param  ImageManager  $imageManager
+     *
      * @return mixed
      */
     public function addImage(AddImagesRequest $request, ImageManager $imageManager)
@@ -135,12 +141,14 @@ class AlbumController extends Controller
     /**
      * Removes an image from an album.
      *
-     * @param DeleteImageRequest $request
+     * @param  DeleteImageRequest  $request     *
+     * @param  string  $image_id
+     *
      * @return mixed
      */
-    public function destroyImage(DeleteImageRequest $request)
+    public function destroyImage(DeleteImageRequest $request, string $image_id)
     {
-        $image = $this->albumService->getAlbum()->images()->findOrFail($request->image_id);
+        $image = $this->albumService->getAlbum()->images()->findOrFail($image_id);
 
         try {
             unlink(storage_path('app/public/gallery/100-100/'.$image->name));
@@ -156,7 +164,8 @@ class AlbumController extends Controller
     /**
      * Sends a comment to an album.
      *
-     * @param CommentRequest $request
+     * @param  CommentRequest  $request
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function comment(CommentRequest $request)
@@ -167,8 +176,9 @@ class AlbumController extends Controller
     /**
      * Fetches comments for an album.
      *
-     * @param Request $request
-     * @param Album $album
+     * @param  Request  $request
+     * @param  Album  $album
+     *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */

@@ -11,5 +11,5 @@ Route::name('albums.')
         Route::post('/add-images/{album}', [AlbumController::class, 'addImage']);
         Route::put('/update/{album}', [AlbumController::class, 'update']);
         Route::delete('/delete/{album}', [AlbumController::class, 'destroy']);
-        Route::delete('/delete-image', [AlbumController::class, 'destroyImage']);
+        Route::delete('/delete-image/{album}/{image_id}', [AlbumController::class, 'destroyImage']);
     });
