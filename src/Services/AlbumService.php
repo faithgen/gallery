@@ -16,12 +16,10 @@ class AlbumService extends CRUDServices
     {
         $this->album = app(Album::class);
 
-        if (request()->has('album_id')) {
-            $this->album = Album::findOrFail(request('album_id'));
-        }
+        $albumId = request()->route('album') ?? request('album_id');
 
-        if (request()->route()->hasParameter('album')) {
-            $this->album = $this->album->resolveRouteBinding(request()->route('album'));
+        if ($albumId) {
+            $this->album = $this->album->resolveRouteBinding($albumId);
         }
     }
 
