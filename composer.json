@@ -5,7 +5,7 @@
     "require": {
         "php": "^7.4",
         "intervention/image": "^2.5",
-        "faithgen/sdk": "^2.0",
+        "faithgen/sdk": "^3.0",
         "crazybooot/base64-validation": "^1.0",
         "illuminate/support": "^6.0|^7.0",
         "illuminate/database": "^6.0|^7.0",
