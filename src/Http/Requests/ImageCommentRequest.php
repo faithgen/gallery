@@ -2,7 +2,6 @@
 
 namespace FaithGen\Gallery\Http\Requests;
 
-use FaithGen\SDK\Helpers\Helper;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ImageCommentRequest extends FormRequest
@@ -25,7 +24,6 @@ class ImageCommentRequest extends FormRequest
     public function rules()
     {
         return [
-            'image_id' => Helper::$idValidation,
             'comment' => 'required',
         ];
     }

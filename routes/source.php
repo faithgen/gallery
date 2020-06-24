@@ -8,8 +8,8 @@ Route::name('albums.')
     ->middleware('source.site')
     ->group(function () {
         Route::post('', [AlbumController::class, 'create']);
-        Route::post('/add-images/{album}', [AlbumController::class, 'addImage']);
+        Route::post('{album}/add-images', [AlbumController::class, 'addImage']);
         Route::put('/update/{album}', [AlbumController::class, 'update']);
         Route::delete('{album}', [AlbumController::class, 'destroy']);
-        Route::delete('/delete-image/{album}/{image_id}', [AlbumController::class, 'destroyImage']);
+        Route::delete('{album}/delete-image/{image_id}', [AlbumController::class, 'destroyImage']);
     });
